@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trafik Oyunu</title>
+  <style>
+    /* Oyun alanı stili */
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <br>
+  <button onclick="moveLeft()">Sol</button>
+  <button onclick="moveRight()">Sağ</button>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let vespaX = canvas.width / 2;
+    const vespaWidth = 50;
+    const vespaSpeed = 5;
+
+    function drawVespa() {
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(vespaX, canvas.height - 100, vespaWidth, 30); // Vespa'yı çiz
+    }
+
+    function moveLeft() {
+      if (vespaX > 0) {
+        vespaX -= vespaSpeed;
+      }
+    }
+
+    function moveRight() {
+      if (vespaX < canvas.width - vespaWidth) {
+        vespaX += vespaSpeed;
+      }
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawVespa();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>
